@@ -10,6 +10,9 @@ console.log(`Headers: ${head.join(" | ")}`);
 console.log(`${data.length} pins`);
 let ok = 0;
 const problems = [];
+// Pinterest rejects any row whose link already appeared earlier in the same file ("Duplicate Pin link")
+const seen = new Set();
+for (const r of data) seen.has(r[5]) ? problems.push(`duplicate link in this file (Pinterest will reject it): ${r[0]}`) : seen.add(r[5]);
 for (const r of data) {
   const [title, media, board, , desc, link, when] = r;
   if (title.length > 100) problems.push(`title too long: ${title}`);

@@ -73,7 +73,10 @@ Create a new board in Pinterest before using a new name.
 6. **Publish images and pages:** commit and push `docs/` to GitHub. Wait about 1 minute for Pages to update.
    Then `node scripts/verify-csv.mjs output/<csv>` checks every image, link and guide page.
 7. **CSV:** `npm run csv` writes `output/pinterest-upload-<date>-1.csv` (max 200 pins per file, times in UTC).
-8. **Upload:** Pinterest (desktop) → Create → *Create Pins in bulk* → upload the CSV.
+   Pinterest rejects a row as **"Duplicate Pin link"** if its link already appears in the same file, so pins that share a
+   product are split into `-1`, `-2`, `-3` files automatically. Upload each file separately.
+   If Pinterest emails you about rejected rows, re-send just those: `node scripts/build-csv.mjs --only=<id1>,<id2> --after=<last scheduled UTC time>`.
+8. **Upload:** Pinterest (desktop) → Settings → *Import content* → *Bulk create Pins* → upload each CSV.
 
 Try it without any keys: `npm run sample` renders demo pins into `output/sample/`.
 

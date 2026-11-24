@@ -5,7 +5,10 @@ import { chromium } from "playwright";
 import { p } from "./lib.mjs";
 
 const dir = process.argv.includes("--sample") ? p("output", "sample") : p("docs", "pins");
-const files = fs.readdirSync(dir).filter((f) => f.endsWith(".png")).sort();
+// --recent=90 only includes PNGs rendered in the last 90 minutes (review a new batch)
+const recent = Number(process.argv.find((a) => a.startsWith("--recent="))?.slice(9) || 0);
+const files = fs.readdirSync(dir).filter((f) => f.endsWith(".png"))
+  .filter((f) => !recent || Date.now() - fs.statSync(`${dir}/${f}`).mtimeMs < recent * 60000).sort();
 const b = await chromium.launch();
 const page = await b.newPage({ viewport: { width: 1800, height: 1640 } });
 for (let i = 0; i < files.length; i += 12) {

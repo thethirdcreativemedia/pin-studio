@@ -8,7 +8,9 @@ import { chromium } from "playwright";
 import { p, readJSON, slug } from "./lib.mjs";
 
 const SAMPLE = process.argv.includes("--sample");
-const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
+// --only=id1,id2 renders just those pins; --new skips pins that already have a PNG (never overwrite published pins)
+const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7).split(",");
+const NEW = process.argv.includes("--new");
 
 const products = SAMPLE ? readJSON(p("samples", "products.json"), {}) : readJSON(p("data", "products.json"), {});
 const copy = SAMPLE ? readJSON(p("samples", "copy.json"), { pins: [] }) : readJSON(p("data", "copy.json"), { pins: [] });
@@ -105,7 +107,8 @@ const rendered = [];
 
 for (const pin of copy.pins) {
   pin.id ||= slug(pin.headline);
-  if (only && pin.id !== only) continue;
+  if (only && !only.includes(pin.id)) continue;
+  if (NEW && fs.existsSync(path.join(outDir, `${pin.id}.png`))) continue;
   try {
     const file = path.join(tmpDir, `${pin.id}.html`);
     fs.writeFileSync(file, html(pin));
