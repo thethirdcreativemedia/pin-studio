@@ -47,8 +47,10 @@ npx playwright install chromium
 Without ComfyUI, pins use clean trend-colour backgrounds, which match the top "Amazon finds" style anyway.
 
 ### 3. Pinterest boards
-Create your boards first (the CSV refers to them by exact name), e.g. *Coffee Bar Ideas*,
-*Amazon Home Finds*, *Cozy Living Room Ideas*, *Gift Ideas for Her*, *Kitchen Must Haves*.
+The CSV refers to boards by exact name. Current @manuelfinds boards:
+*Gift Ideas for Her*, *Cozy Living Room Decor*, *Christmas Gift Ideas*, *Wedding Decor Ideas*,
+*Home Improvement Ideas*, *Viral Beauty Finds*, *Tech Finds*, *Halloween Decor*, *Perfume Finds*.
+Create a new board in Pinterest before using a new name.
 
 ### 4. Free image hosting with GitHub Pages
 1. Create a free GitHub account and a **public** repository named `pin-studio`.

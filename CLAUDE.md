@@ -24,7 +24,10 @@ Pin object fields:
 - `cta`: ≤ 22 chars, e.g. "See it on Amazon →"
 - `scene` + `scenePrompt`: optional AI background (lifestyle/howto look best). The prompt describes ONLY a setting
   (room, surface, light, colours): never the product, people, text or brands. Reuse one scene id across similar pins.
-- `board`: Pinterest board name (must already exist in the account)
+- `board`: Pinterest board name, must already exist. Current boards: Gift Ideas for Her, Cozy Living Room Decor,
+  Christmas Gift Ideas, Wedding Decor Ideas, Home Improvement Ideas, Viral Beauty Finds, Tech Finds, Halloween Decor, Perfume Finds.
+  Audience (Nov 2026 audit): 71% women, 25–34, US-focused. Favour home decor, gifts for her, wedding, kitchen, beauty;
+  benefit-led product pins get 5–14% outbound click rates vs ~0.1% for curiosity pins. Use US links (OneLink covers Canada).
 - `title`: ≤ 100 chars, keyword-first, as people search Pinterest
 - `description`: ≤ 400 chars (the script appends "#affiliate" and the Amazon disclosure), natural sentences with 2–3 search keywords
 - `keywords`: 3–6 Pinterest search phrases
