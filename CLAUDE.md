@@ -11,8 +11,12 @@ Make **3 pins per product, each a different format**, plus a **collage** pin for
 
 Pin object fields:
 - `id`: unique kebab-case, e.g. `breville-latte-howto`. Also the PNG file name.
-- `format`: `whybuy` | `howto` | `lifestyle` | `collage`
-- `palette`: `warm` (beige/brown, the top-performing "Amazon finds" look) | `glacier` (icy blue, 2026 trend) | `deco` (green/gold Neo Deco) | `afro` (terracotta, Afrohemian) | `funhaus` (stripes) | `blush` (beauty/gifts for her)
+- `format`: `guide` (numbered gift guide, 6, 9 or 12 products: top performer for reach/saves) | `hero` (full-width Amazon
+  lifestyle photo, pick it with `image`) | `whybuy` (best for outbound clicks) | `howto` | `lifestyle` (polaroid) | `collage` (legacy)
+- `image`: which Amazon photo to use (0 = main, 1..n = listing photos). Run `node scripts/image-sheet.mjs <ASIN>` and pick
+  in-room/model shots. Never pick a photo that shows a price, or a different colour than the linked product.
+- `sub`: guide only, small caps line under the title (e.g. "she'll actually use")
+- `palette`: rich v2 palettes `holiday` (burgundy/gold, Christmas) | `noir` (black/gold) | `cream`; plus `warm` (beige/brown, the top-performing "Amazon finds" look) | `glacier` (icy blue, 2026 trend) | `deco` (green/gold Neo Deco) | `afro` (terracotta, Afrohemian) | `funhaus` (stripes) | `blush` (beauty/gifts for her)
 - `products`: product keys like `us-B0XXXXXXX` (1 for whybuy/howto/lifestyle, 3–6 for collage, same market)
 - `link`: the product key the pin links to (collage: the hero product)
 - `kicker`: 2–4 word eyebrow, e.g. "Coffee bar upgrade"
