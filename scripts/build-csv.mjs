@@ -23,9 +23,15 @@ let ready = [];
 for (const pin of copy.pins) {
   if (!pin.id || exported[pin.id]) continue;
   if (!fs.existsSync(`${pinDir}/${pin.id}.png`)) { console.warn(`  skip ${pin.id}: no image rendered yet`); continue; }
+  if (!pin.board) { console.warn(`  skip ${pin.id}: no board set`); continue; }
+  // gift guides link to their shoppable page (every product tagged); other pins link straight to the product
+  if (pin.format === "guide") {
+    if (!fs.existsSync(p("docs", "guides", pin.id, "index.html"))) { console.warn(`  skip ${pin.id}: run npm run guides first`); continue; }
+    ready.push({ pin, link: base.replace(/pins\/$/, "") + `guides/${pin.id}/` });
+    continue;
+  }
   const prod = products[pin.link || pin.products?.[0]];
   if (!prod?.link) { console.warn(`  skip ${pin.id}: no product link`); continue; }
-  if (!pin.board) { console.warn(`  skip ${pin.id}: no board set`); continue; }
   ready.push({ pin, link: prod.link });
 }
 

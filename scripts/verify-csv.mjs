@@ -15,7 +15,16 @@ for (const r of data) {
   if (title.length > 100) problems.push(`title too long: ${title}`);
   if (desc.length > 500) problems.push(`description too long: ${title}`);
   if (!desc.includes("Amazon Associate")) problems.push(`no disclosure: ${title}`);
-  if (!/tag=/.test(link)) problems.push(`link has no tag: ${title}`);
+  if (link.includes("/guides/")) {
+    // gift-guide page: must be live and every product link on it must carry a tag
+    const res = await fetch(link);
+    const html = res.ok ? await res.text() : "";
+    const amazon = [...html.matchAll(/href="(https:\/\/www\.amazon\.[^"]+)"/g)].map((m) => m[1]);
+    const untagged = amazon.filter((u) => !/tag=/.test(u));
+    if (!res.ok) problems.push(`guide page ${res.status}: ${link}`);
+    else if (!amazon.length || untagged.length) problems.push(`guide page links not all tagged: ${link}`);
+    else console.log(`  guide page OK: ${link.split("/guides/")[1]} -> ${new Set(amazon).size} products, all tagged`);
+  } else if (!/tag=/.test(link)) problems.push(`link has no tag: ${title}`);
   const s = (await fetch(media, { method: "HEAD" })).status;
   s === 200 ? ok++ : problems.push(`image ${s}: ${media}`);
 }

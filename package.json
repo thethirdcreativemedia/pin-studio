@@ -9,7 +9,8 @@
                     "render":  "node scripts/render-pins.mjs",
                     "csv":  "node scripts/build-csv.mjs",
                     "sample":  "node scripts/render-pins.mjs --sample",
-                    "check":  "node scripts/check-keys.mjs"
+                    "check":  "node scripts/check-keys.mjs",
+                    "guides":  "node scripts/build-guides.mjs"
                 },
     "dependencies":  {
                          "playwright":  "^1.65.1"
