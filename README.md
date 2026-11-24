@@ -68,7 +68,10 @@ Create a new board in Pinterest before using a new name.
    Claude follows `CLAUDE.md` and fills `data/copy.json`.
 4. **Scenes (optional):** with ComfyUI running, `npm run scenes`
 5. **Render:** `npm run render`, then open `output/preview.html` and check every pin.
-6. **Publish images:** commit and push `docs/pins` to GitHub. Wait about 1 minute for Pages to update.
+5b. **Gift-guide pages:** `npm run guides` builds a shoppable page for every `guide` pin (each product with its own
+   tagged link). Guide pins link to that page; all other pins link straight to their product.
+6. **Publish images and pages:** commit and push `docs/` to GitHub. Wait about 1 minute for Pages to update.
+   Then `node scripts/verify-csv.mjs output/<csv>` checks every image, link and guide page.
 7. **CSV:** `npm run csv` writes `output/pinterest-upload-<date>-1.csv` (max 200 pins per file, times in UTC).
 8. **Upload:** Pinterest (desktop) → Create → *Create Pins in bulk* → upload the CSV.
 
