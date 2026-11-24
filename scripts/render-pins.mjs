@@ -25,10 +25,17 @@ if (!copy.pins.length) {
 const esc = (s = "") => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const imgSrc = (u) => (/^https?:/.test(u) ? u : pathToFileURL(p(u)).href);
 
-function productImg(key) {
+// image index: 0 = main photo, 1..n = Amazon's other listing photos (often lifestyle shots)
+function imageUrl(key, index = 0) {
   const prod = products[key];
   if (!prod?.imageUrl) throw new Error(`No product/image for "${key}". Run npm run fetch first.`);
-  return `<div class="card"><img src="${esc(imgSrc(prod.imageUrl))}" alt=""></div>`;
+  const all = [prod.imageUrl, ...(prod.extraImages || [])];
+  if (!all[index]) throw new Error(`"${key}" has no image #${index}`);
+  return imgSrc(all[index]);
+}
+
+function productImg(key, index = 0) {
+  return `<div class="card"><img src="${esc(imageUrl(key, index))}" alt=""></div>`;
 }
 
 function background(pin) {
@@ -43,20 +50,35 @@ const header = (pin) => `
   ${pin.script ? `<div class="script">${esc(pin.script)}</div>` : ""}`;
 
 const layouts = {
+  hero: (pin) => `<div class="top">${header(pin)}</div>
+    <div class="photo"><img src="${esc(imageUrl(pin.products[0], pin.image || 0))}" alt=""></div>
+    <div class="cta">${esc(pin.cta || "Tap to shop →")}</div>`,
+
+  guide: (pin) => {
+    const keys = pin.products.slice(0, 12);
+    // 9 or 12 products: 3 columns; up to 6: 2 columns of large square tiles. Use 6, 9 or 12 products.
+    const cols = keys.length > 6 ? "c3" : "c2s";
+    const rows = Math.ceil(keys.length / (cols === "c3" ? 3 : 2));
+    return `${header(pin)}${pin.sub ? `<div class="sub">${esc(pin.sub)}</div>` : ""}
+    <div class="gg ${cols}" style="${cols === "c3" ? `grid-template-rows:repeat(${rows},1fr)` : ""}">${keys
+      .map((k, i) => `<div class="tile"><img src="${esc(imageUrl(k, 0))}" alt=""><div class="no">${i + 1}</div></div>`).join("")}</div>
+    <div class="cta">${esc(pin.cta || "Tap to shop the list →")}</div>`;
+  },
+
   whybuy: (pin) => `${header(pin)}
-    ${productImg(pin.products[0]).replace('class="card"', 'class="card hero"')}
+    ${productImg(pin.products[0], pin.image || 0).replace('class="card"', 'class="card hero"')}
     <div class="benefits">${(pin.benefits || []).slice(0, 3).map((b) => `<div class="benefit"><div class="tick">✓</div><div>${esc(b)}</div></div>`).join("")}</div>
     <div class="cta">${esc(pin.cta || "See it on Amazon →")}</div>`,
 
   howto: (pin) => `${header(pin)}
-    <div class="row">${productImg(pin.products[0]).replace('class="card"', 'class="card hero"')}
+    <div class="row">${productImg(pin.products[0], pin.image || 0).replace('class="card"', 'class="card hero"')}
       <div class="steps">${(pin.steps || []).slice(0, 4).map((s, i) => `<div class="step"><div class="num">${i + 1}</div><span>${esc(s)}</span></div>`).join("")}</div>
     </div>
     ${pin.tip ? `<div class="tip">${esc(pin.tip)}</div>` : ""}
     <div class="cta">${esc(pin.cta || "Get yours on Amazon →")}</div>`,
 
   lifestyle: (pin) => `${header(pin)}
-    <div class="polaroid">${productImg(pin.products[0])}<div class="caption">${esc(pin.caption || "")}</div></div>
+    <div class="polaroid">${productImg(pin.products[0], pin.image || 0)}<div class="caption">${esc(pin.caption || "")}</div></div>
     <div class="cta">${esc(pin.cta || "Shop the look →")}</div>`,
 
   collage: (pin) => {
@@ -69,7 +91,7 @@ const layouts = {
 
 function html(pin) {
   const layout = layouts[pin.format];
-  if (!layout) throw new Error(`Unknown format "${pin.format}" (use whybuy, howto, lifestyle, collage)`);
+  if (!layout) throw new Error(`Unknown format "${pin.format}" (use whybuy, howto, lifestyle, collage, hero, guide)`);
   return `<!doctype html><html><head><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=block" rel="stylesheet">

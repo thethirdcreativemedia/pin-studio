@@ -12,6 +12,12 @@ body { font-family: "Inter", "Segoe UI", sans-serif; color: var(--ink); backgrou
 .funhaus { --bg:#fbf3e6; --bg2:#f3e1c7; --ink:#2b2b2b; --accent:#d8452f; --card:#ffffff; --on-accent:#fff; }
 .blush   { --bg:#f6e9e6; --bg2:#ecd3ce; --ink:#5b3a3a; --accent:#b97a74; --card:#fffaf9; --on-accent:#fff; }
 .funhaus .bgfill { background: repeating-linear-gradient(90deg, #fbf3e6 0 60px, #f6dcd3 60px 120px); }
+/* rich palettes (v2) */
+.holiday { --bg:#5c1424; --bg2:#3a0a15; --ink:#f8ead7; --accent:#e0b874; --card:#fffaf3; --on-accent:#3a0a15; }
+.noir    { --bg:#1b1715; --bg2:#0b0908; --ink:#f4e9d8; --accent:#d6ad6a; --card:#fbf6ee; --on-accent:#1b1715; }
+.cream   { --bg:#f4ece1; --bg2:#e6d6c1; --ink:#3d2a1e; --accent:#9c6b3f; --card:#fffdf9; --on-accent:#fff; }
+.holiday .bgfill, .noir .bgfill { background: radial-gradient(90% 60% at 50% 30%, var(--bg) 0%, var(--bg2) 100%); }
+.holiday .bgfill::after, .noir .bgfill::after { content:""; position:absolute; inset:22px; border:2px solid var(--accent); opacity:.55; border-radius:6px; }
 
 .bgfill { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 0%, var(--bg) 40%, var(--bg2) 100%); z-index: 0; }
 .scene { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
@@ -62,5 +68,32 @@ body { font-family: "Inter", "Segoe UI", sans-serif; color: var(--ink); backgrou
 .collage .grid.n6 { grid-template-columns: 1fr 1fr 1fr; }
 .collage .card { padding: 24px; min-height: 0; }
 .collage .cta { margin-top: 0; }
+
+/* bolder headlines everywhere (v2) */
+.headline { font-size: 84px; line-height: 1.0; letter-spacing: -0.5px; }
+.kicker { font-size: 28px; }
+.cta { font-size: 36px; padding: 26px 60px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+
+/* numbered gift guide (v2) */
+.guide .wrap { padding: 64px 60px 54px; }
+.guide .headline { font-size: 96px; margin-top: 6px; }
+.guide .script { font-size: 72px; margin-top: -6px; }
+.guide .sub { text-align: center; font-size: 24px; letter-spacing: 5px; text-transform: uppercase; opacity: .85; margin-top: 4px; }
+.gg { display: grid; gap: 22px; margin: 30px 0 30px; flex: 1 1 auto; min-height: 0; }
+.gg.c3 { grid-template-columns: repeat(3, 1fr); }
+.gg.c2s { grid-template-columns: repeat(2, 318px); grid-auto-rows: 318px; justify-content: center; align-content: center; gap: 28px 34px; }
+.gg .tile { position: relative; background: var(--card); border-radius: 22px; padding: 16px; min-height: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 14px 34px rgba(0,0,0,.25); }
+.gg .tile img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.gg .no { position: absolute; top: -12px; left: -12px; width: 54px; height: 54px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+  font: 700 26px "Playfair Display", serif; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.guide .cta { margin-top: 0; }
+
+/* full-bleed lifestyle hero (v2): Amazon photo full width, never cropped or covered */
+.hero .wrap { padding: 60px 0 56px; }
+.hero .top { padding: 0 60px; }
+.hero .photo { flex: 1 1 auto; min-height: 0; margin: 34px 0; display: flex; align-items: center; justify-content: center; }
+.hero .photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.hero .cta { margin-top: 0; }
+.hero .script { font-size: 60px; }
 
 .footer { text-align: center; font-size: 22px; opacity: .65; margin-top: 18px; letter-spacing: 1px; }

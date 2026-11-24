@@ -86,7 +86,7 @@ for (const [market, set] of Object.entries(wanted)) {
         title: it.itemInfo?.title?.displayValue || "",
         features: it.itemInfo?.features?.displayValues || [],
         imageUrl: img?.url || "",
-        extraImages: (it.images?.variants || []).map((v) => v.large?.url).filter(Boolean).slice(0, 3),
+        extraImages: (it.images?.variants || []).map((v) => v.large?.url).filter(Boolean).slice(0, 8),
         link: it.detailPageURL, // already contains your partner tag
         fetchedAt: new Date().toISOString(),
       };
