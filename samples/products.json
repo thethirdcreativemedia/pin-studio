@@ -1,0 +1,8 @@
+{
+  "us-SAMPLE0001": { "key": "us-SAMPLE0001", "market": "us", "asin": "SAMPLE0001", "title": "Sample espresso machine", "imageUrl": "samples/espresso.svg", "link": "https://www.amazon.com/dp/SAMPLE0001?tag=yourtag-20" },
+  "us-SAMPLE0002": { "key": "us-SAMPLE0002", "market": "us", "asin": "SAMPLE0002", "title": "Sample boucle accent chair", "imageUrl": "samples/chair.svg", "link": "https://www.amazon.com/dp/SAMPLE0002?tag=yourtag-20" },
+  "us-SAMPLE0003": { "key": "us-SAMPLE0003", "market": "us", "asin": "SAMPLE0003", "title": "Sample stand mixer", "imageUrl": "samples/mixer.svg", "link": "https://www.amazon.com/dp/SAMPLE0003?tag=yourtag-20" },
+  "us-SAMPLE0004": { "key": "us-SAMPLE0004", "market": "us", "asin": "SAMPLE0004", "title": "Sample arched floor mirror", "imageUrl": "samples/mirror.svg", "link": "https://www.amazon.com/dp/SAMPLE0004?tag=yourtag-20" },
+  "us-SAMPLE0005": { "key": "us-SAMPLE0005", "market": "us", "asin": "SAMPLE0005", "title": "Sample linen table lamp", "imageUrl": "samples/lamp.svg", "link": "https://www.amazon.com/dp/SAMPLE0005?tag=yourtag-20" },
+  "ca-SAMPLE0006": { "key": "ca-SAMPLE0006", "market": "ca", "asin": "SAMPLE0006", "title": "Sample hair styler set", "imageUrl": "samples/airwrap.svg", "link": "https://www.amazon.ca/dp/SAMPLE0006?tag=yourtag0c-20" }
+}

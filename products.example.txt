@@ -1,0 +1,5 @@
+# One product per line: <market> <ASIN or Amazon product URL>
+# market = us or ca. Lines starting with # are ignored.
+us B08XXXXXXX
+us https://www.amazon.com/dp/B07XXXXXXX
+ca B09XXXXXXX

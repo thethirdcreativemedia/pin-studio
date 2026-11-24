@@ -1,0 +1,17 @@
+{
+    "name":  "pin-studio",
+    "version":  "1.0.0",
+    "private":  true,
+    "type":  "module",
+    "scripts":  {
+                    "fetch":  "node scripts/fetch-products.mjs",
+                    "scenes":  "node scripts/generate-scenes.mjs",
+                    "render":  "node scripts/render-pins.mjs",
+                    "csv":  "node scripts/build-csv.mjs",
+                    "sample":  "node scripts/render-pins.mjs --sample",
+                    "check":  "node scripts/check-keys.mjs"
+                },
+    "dependencies":  {
+                         "playwright":  "^1.65.1"
+                     }
+}

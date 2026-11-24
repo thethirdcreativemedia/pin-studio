@@ -1,0 +1,21 @@
+{
+  "markets": {
+    "us": { "marketplace": "www.amazon.com", "partnerTag": "yourtag-20", "language": "en_US" },
+    "ca": { "marketplace": "www.amazon.ca", "partnerTag": "yourtag0c-20", "language": "en_CA" }
+  },
+
+  "imageBaseUrl": "https://YOUR-GITHUB-USERNAME.github.io/pin-studio/pins/",
+
+  "schedule": {
+    "pinsPerDay": 6,
+    "startDate": "",
+    "timesUtc": ["13:00", "15:30", "18:00", "20:30", "23:00", "01:30"]
+  },
+
+  "comfyui": {
+    "url": "http://127.0.0.1:8188",
+    "checkpoint": "sd_xl_base_1.0.safetensors",
+    "steps": 28,
+    "cfg": 6.5
+  }
+}
